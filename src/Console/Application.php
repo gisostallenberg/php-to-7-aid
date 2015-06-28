@@ -9,7 +9,9 @@
  */
 namespace GisoStallenberg\phpTo7aid\Console;
 
+use GisoStallenberg\phpTo7aid\Console\Command\RunCommand;
 use Symfony\Component\Console\Application as BaseApplication;
+
 /**
  * @author Giso Stallenberg <gisostallenberg@gmail.com>
  */
@@ -22,6 +24,7 @@ class Application extends BaseApplication
     {
         error_reporting(-1);
         parent::__construct('PHP To 7 Aid', '0.0.0');
+        $this->add(new RunCommand() );
     }
 
     public function getLongVersion()
