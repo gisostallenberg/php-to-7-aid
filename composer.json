@@ -20,5 +20,6 @@
         "psr-4": {
             "GisoStallenberg\\phpTo7aid\\": "src/"
         }
-    }
+    },
+    "bin": ["php-to-7-aid"]
 }
