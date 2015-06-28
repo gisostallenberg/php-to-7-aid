@@ -1,0 +1,20 @@
+{
+    "output": "php-to-7-aid.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "extract": false,
+    "files": [
+        "LICENSE"
+    ],
+    "finder": [
+        {
+            "name": ["*.php"],
+            "in": ["vendor", "src"]
+        }
+    ],
+    "git-commit": "git-commit",
+    "stub": "src/Resources/phar-stub.php",
+    "web": false
+}
