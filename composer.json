@@ -9,7 +9,7 @@
             "email": "gisostallenberg@gmail.com"
         }
     ],
-    "keywords": "php7, php-7, upgrade, code fixer",
+    "keywords": ["php7", "php-7", "upgrade", "migrate", "code fixer"],
     "minimum-stability": "stable",
     "require": {
         "php": "^5.3.6||7.0.*",
