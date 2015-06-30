@@ -11,15 +11,15 @@ namespace GisoStallenberg\phpTo7aid;
 
 use Symfony\Component\Finder\SplFileInfo;
 
-interface FinderInterface {
+interface ScannerInterface {
     /**
-     * prepares the finder for execution
+     * prepares the scanner for execution
      * 
      */
     function prepare(SplFileInfo $file);
     
     /**
-     * executes the finder
+     * executes the scanner
      * 
      */
     function execute(SplFileInfo $file);

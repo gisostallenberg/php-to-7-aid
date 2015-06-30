@@ -43,7 +43,7 @@ class RunCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->loadSolvers($input, $output);
-        $this->loadFinders($input, $output);
+        $this->loadScanners($input, $output);
 
         $codefinder = Finder::create()
             ->files()
@@ -52,10 +52,10 @@ class RunCommand extends Command {
         
         foreach ($codefinder as $projectfile) {
             $this->prepareSolvers($projectfile, $input, $output);
-            $this->prepareFinders($projectfile, $input, $output);
+            $this->prepareScanners($projectfile, $input, $output);
             
             $this->executeSolvers($projectfile, $input, $output);
-            $this->executeFinders($projectfile, $input, $output);
+            $this->executeScanners($projectfile, $input, $output);
         }
     }
 
@@ -64,9 +64,9 @@ class RunCommand extends Command {
         $this->solvers = $this->loadClasses('Solver', $input, $output);
     }
 
-    private function loadFinders(InputInterface $input, OutputInterface $output)
+    private function loadScanners(InputInterface $input, OutputInterface $output)
     {
-        $this->finders = $this->loadClasses('Finder', $input, $output);
+        $this->scanners = $this->loadClasses('Scanner', $input, $output);
     }
         
     private function loadClasses($type, InputInterface $input, OutputInterface $output)
@@ -98,17 +98,17 @@ class RunCommand extends Command {
         }
     }
 
-    private function prepareFinders(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    private function prepareScanners(SplFileInfo $file, InputInterface $input, OutputInterface $output)
     {
-        foreach ($this->finders as $finder) {
-            $finder->prepare($file);
+        foreach ($this->scanners as $scanner) {
+            $scanner->prepare($file);
         }
     }
 
-    private function executeFinders(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    private function executeScanners(SplFileInfo $file, InputInterface $input, OutputInterface $output)
     {
-        foreach ($this->finders as $finder) {
-            $finder->execute($file);
+        foreach ($this->scanners as $scanner) {
+            $scanner->execute($file);
         }
     }
 

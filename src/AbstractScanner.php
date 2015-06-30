@@ -11,15 +11,15 @@ namespace GisoStallenberg\phpTo7aid;
 
 use Symfony\Component\Finder\SplFileInfo;
 
-abstract class AbstractFinder implements FinderInterface {
+abstract class AbstractScanner implements ScannerInterface {
     /**
-     * prepares the finder for execution
+     * prepares the scanner for execution
      * 
      */
     abstract function prepare(SplFileInfo $file);
     
     /**
-     * executes the finder
+     * executes the scanner
      * 
      */
     abstract function execute(SplFileInfo $file);

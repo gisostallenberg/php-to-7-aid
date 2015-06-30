@@ -7,9 +7,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace GisoStallenberg\phpTo7aid\Finder;
+namespace GisoStallenberg\phpTo7aid\Scanner;
 
-use GisoStallenberg\phpTo7aid\AbstractFinder;
+use GisoStallenberg\phpTo7aid\AbstractScanner;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -17,9 +17,9 @@ use Symfony\Component\Finder\SplFileInfo;
  * In PHP7 resolving variables has changed from 'logic' to from left to right
  * { and } should be added by the programmer in cases where logic surpasses the left to right
  */
-class VariableHandlingFinder extends AbstractFinder {
+class VariableHandlingScanner extends AbstractScanner {
     /**
-     * prepares the finder for execution
+     * prepares the scanner for execution
      * 
      */
     public function prepare(SplFileInfo $file)
@@ -28,7 +28,7 @@ class VariableHandlingFinder extends AbstractFinder {
     }
     
     /**
-     * executes the finder
+     * executes the scanner
      * 
      */
     public function execute(SplFileInfo $file)
