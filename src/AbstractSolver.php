@@ -10,5 +10,15 @@
 namespace GisoStallenberg\phpTo7aid;
 
 abstract class AbstractSolver implements SolverInterface {
+    /**
+     * prepares the solver for execution
+     * 
+     */
+    abstract function prepare(SplFileInfo $file);
     
+    /**
+     * executes the solver
+     * 
+     */
+    abstract function execute(SplFileInfo $file);
 }

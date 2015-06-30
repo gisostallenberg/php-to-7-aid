@@ -9,6 +9,18 @@
  */
 namespace GisoStallenberg\phpTo7aid;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 abstract class AbstractFinder implements FinderInterface {
+    /**
+     * prepares the finder for execution
+     * 
+     */
+    abstract function prepare(SplFileInfo $file);
     
+    /**
+     * executes the finder
+     * 
+     */
+    abstract function execute(SplFileInfo $file);
 }

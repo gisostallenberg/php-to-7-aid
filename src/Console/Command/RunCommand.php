@@ -14,9 +14,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class RunCommand extends Command {
-        /**
+    /**
      * @see Command
      */
     protected function configure()
@@ -40,7 +42,80 @@ class RunCommand extends Command {
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('nothing implemented yet');
-        // does nothing yet
+        $this->loadSolvers($input, $output);
+        $this->loadFinders($input, $output);
+
+        $codefinder = Finder::create()
+            ->files()
+            ->name('*.php')
+            ->in($input->getArgument('path') );
+        
+        foreach ($codefinder as $projectfile) {
+            $this->prepareSolvers($projectfile, $input, $output);
+            $this->prepareFinders($projectfile, $input, $output);
+            
+            $this->executeSolvers($projectfile, $input, $output);
+            $this->executeFinders($projectfile, $input, $output);
+        }
+    }
+
+    private function loadSolvers(InputInterface $input, OutputInterface $output)
+    {
+        $this->solvers = $this->loadClasses('Solver', $input, $output);
+    }
+
+    private function loadFinders(InputInterface $input, OutputInterface $output)
+    {
+        $this->finders = $this->loadClasses('Finder', $input, $output);
+    }
+        
+    private function loadClasses($type, InputInterface $input, OutputInterface $output)
+    {
+        $classes = array();
+        foreach (Finder::create()
+            ->files()
+            ->name('*' . $type . '.php')
+            ->in(array_merge(
+                array(
+                    __DIR__ . '/../../' . $type . '/',
+                ),
+                $input->getOption('additionals')
+                )
+            ) as $file) {
+
+            require $file->getRealPath();
+            $class = 'GisoStallenberg\\phpTo7aid\\' . $type . '\\' . $file->getBasename('.php');
+            $classes[] = new $class();
+        }
+
+        return $classes;
+    }
+
+    private function prepareSolvers(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    {
+        foreach ($this->solvers as $solver) {
+            $solver->prepare($file);
+        }
+    }
+
+    private function prepareFinders(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    {
+        foreach ($this->finders as $finder) {
+            $finder->prepare($file);
+        }
+    }
+
+    private function executeFinders(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    {
+        foreach ($this->finders as $finder) {
+            $finder->execute($file);
+        }
+    }
+
+    private function executeSolvers(SplFileInfo $file, InputInterface $input, OutputInterface $output)
+    {
+        foreach ($this->solvers as $solver) {
+            $solver->execute($file);
+        }
     }
 }

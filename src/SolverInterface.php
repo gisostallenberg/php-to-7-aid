@@ -9,6 +9,18 @@
  */
 namespace GisoStallenberg\phpTo7aid;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 interface SolverInterface {
+    /**
+     * prepares the solver for execution
+     * 
+     */
+    function prepare(SplFileInfo $file);
     
+    /**
+     * executes the solver
+     * 
+     */
+    function execute(SplFileInfo $file);
 }

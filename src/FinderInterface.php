@@ -9,6 +9,18 @@
  */
 namespace GisoStallenberg\phpTo7aid;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 interface FinderInterface {
+    /**
+     * prepares the finder for execution
+     * 
+     */
+    function prepare(SplFileInfo $file);
     
+    /**
+     * executes the finder
+     * 
+     */
+    function execute(SplFileInfo $file);
 }
