@@ -71,18 +71,28 @@ class RunCommand extends Command {
         
     private function loadClasses($type, InputInterface $input, OutputInterface $output)
     {
+        $directories = array();
+        if (is_dir(__DIR__ . '/../../' . $type . '/') ) {
+            $directories[] = __DIR__ . '/../../' . $type . '/';
+        }
+        $directories = array_merge(
+            $directories,
+            $input->getOption('additionals')
+        );
+        
+        if (empty($directories) ) {
+            return array();
+        }
+        
         $classes = array();
         foreach (Finder::create()
             ->files()
             ->name('*' . $type . '.php')
-            ->in(array_merge(
-                array(
-                    __DIR__ . '/../../' . $type . '/',
-                ),
-                $input->getOption('additionals')
-                )
-            ) as $file) {
+            ->in($directories) as $file) {
 
+            if ($file->getRealPath() == '') {
+                continue;
+            }
             require $file->getRealPath();
             $class = 'GisoStallenberg\\phpTo7aid\\' . $type . '\\' . $file->getBasename('.php');
             $classes[] = new $class();
