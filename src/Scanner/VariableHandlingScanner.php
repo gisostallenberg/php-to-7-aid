@@ -22,17 +22,36 @@ class VariableHandlingScanner extends AbstractScanner {
      * prepares the scanner for execution
      * 
      */
-    public function prepare(SplFileInfo $file)
+    public function prepare(SplFileInfo $fileinfo)
     {
-        
+        $this->file = $fileinfo->openFile();
     }
     
     /**
      * executes the scanner
      * 
      */
-    public function execute(SplFileInfo $file)
+    public function execute(SplFileInfo $fileinfo)
     {
-        
+        while (!$this->file->eof()) {
+            if ($this->checkVariableVariables($this->file->fgets() ) === true) {
+                // report
+            }
+        }
+    }
+    
+    /**
+     * Find cases of "$$variable" that need curly braces added.
+     *
+     * @access	public
+     * @param	string	Line to test against.
+     * @return	boolean	Line matches test.
+     */
+    private function checkVariableVariables($line) {
+        $regex = "#(?:(?:->|\\$)\\$[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]+|::\\$[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]+\[.+?\]\(.*?\))#i";
+        if (preg_match($regex, $line) ) {
+            return true;
+        }
+        return false;
     }
 }

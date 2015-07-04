@@ -5,6 +5,9 @@ About
 -----
 The goal of phpTo7aid is to identify PHP 5 code that will not work in PHP 7. It tries to aid you as much as possible in resolving this issues, by either providing the exact solution or giving hints on how to solve the issue.
 
+##### Status #####
+Please note that this version is still in development. See Versioning below or SemVer: "Major version zero (0.y.z) is for initial development. Anything may change at any time. The public API should not be considered stable."
+
 
 ##### Versioning #####
 phpTo7aid uses [Semantic Versioning 2](http://semver.org/) as guideline for new versions.
@@ -16,6 +19,16 @@ phpTo7aid is licensed under the MIT License - see the `LICENSE` file for details
 
 ##### Authors #####
 [Giso Stallenberg](https://github.com/gisostallenberg/)
+
+
+##### Installing #####
+Using [composer](https://getcomposer.org/download/).
+
+`composer require gisostallenberg/php-to-7-aid`
+
+Run directly
+
+`wget https://github.com/gisostallenberg/php-to-7-aid/raw/master/php-to-7-aid.phar -O php-to-7-aid.phar; php php-to-7-aid.phar run`
 
 
 ##### Backward Incompatible Changes in PHP 7 #####
