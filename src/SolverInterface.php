@@ -23,4 +23,9 @@ interface SolverInterface {
      * 
      */
     function execute(SplFileInfo $file);
+    
+    /**
+     * indicates any fix can be done even in php5, so the code is future-proof
+     */
+    function canBeFixedPrePHP7();
 }
