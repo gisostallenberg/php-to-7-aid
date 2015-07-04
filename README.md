@@ -20,6 +20,8 @@ phpTo7aid is licensed under the MIT License - see the `LICENSE` file for details
 
 ##### Backward Incompatible Changes in PHP 7 #####
 
+See [PHP 7 UPGRADING](https://github.com/php/php-src/blob/php-7.0.0alpha2/UPGRADING)
+
 ###### Implemented ######
 
 ###### Will not be implemented (including reason) ######
